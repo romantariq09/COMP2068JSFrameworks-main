@@ -1,0 +1,80 @@
+<h1>{{title}}</h1>
+
+<p>Update the details of your task.</p>
+
+<form action="/tasks/edit/{{task._id}}" method="POST">
+  <div>
+    <label for="title">Task Title</label><br />
+    <input
+      type="text"
+      id="title"
+      name="title"
+      value="{{task.title}}"
+      required
+    />
+  </div>
+
+  <br />
+
+  <div>
+    <label for="description">Description</label><br />
+    <textarea
+      id="description"
+      name="description"
+      rows="4"
+      cols="40"
+    >{{task.description}}</textarea>
+  </div>
+
+  <br />
+
+  <div>
+    <label for="category">Category</label><br />
+    <select id="category" name="category" required>
+      <option value="School" {{#if isSchool}}selected{{/if}}>School</option>
+      <option value="Work" {{#if isWork}}selected{{/if}}>Work</option>
+      <option value="Personal" {{#if isPersonal}}selected{{/if}}>Personal</option>
+    </select>
+  </div>
+
+  <br />
+
+  <div>
+    <label for="dueDate">Due Date</label><br />
+    <input
+      type="date"
+      id="dueDate"
+      name="dueDate"
+      value="{{dueDateValue}}"
+      required
+    />
+  </div>
+
+  <br />
+
+  <div>
+    <label for="priority">Priority</label><br />
+    <select id="priority" name="priority">
+      <option value="Low" {{#if isLow}}selected{{/if}}>Low</option>
+      <option value="Medium" {{#if isMedium}}selected{{/if}}>Medium</option>
+      <option value="High" {{#if isHigh}}selected{{/if}}>High</option>
+    </select>
+  </div>
+
+  <br />
+
+  <div>
+    <label for="status">Status</label><br />
+    <select id="status" name="status">
+      <option value="To Do" {{#if isToDo}}selected{{/if}}>To Do</option>
+      <option value="In Progress" {{#if isInProgress}}selected{{/if}}>In Progress</option>
+      <option value="Completed" {{#if isCompleted}}selected{{/if}}>Completed</option>
+    </select>
+  </div>
+
+  <br />
+
+  <button type="submit">Update Task</button>
+</form>
+
+<p><a href="/tasks/manage">Back to My Tasks</a></p>

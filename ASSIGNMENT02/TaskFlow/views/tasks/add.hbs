@@ -1,0 +1,78 @@
+<h1>{{title}}</h1>
+
+<p>Add a task to your personal TaskFlow planner.</p>
+
+<form action="/tasks/add" method="POST">
+  <div>
+    <label for="title">Task Title</label><br />
+    <input
+      type="text"
+      id="title"
+      name="title"
+      required
+    />
+  </div>
+
+  <br />
+
+  <div>
+    <label for="description">Description</label><br />
+    <textarea
+      id="description"
+      name="description"
+      rows="4"
+      cols="40"
+    ></textarea>
+  </div>
+
+  <br />
+
+  <div>
+    <label for="category">Category</label><br />
+    <select id="category" name="category" required>
+      <option value="School">School</option>
+      <option value="Work">Work</option>
+      <option value="Personal">Personal</option>
+    </select>
+  </div>
+
+  <br />
+
+  <div>
+    <label for="dueDate">Due Date</label><br />
+    <input
+      type="date"
+      id="dueDate"
+      name="dueDate"
+      required
+    />
+  </div>
+
+  <br />
+
+  <div>
+    <label for="priority">Priority</label><br />
+    <select id="priority" name="priority">
+      <option value="Low">Low</option>
+      <option value="Medium" selected>Medium</option>
+      <option value="High">High</option>
+    </select>
+  </div>
+
+  <br />
+
+  <div>
+    <label for="status">Status</label><br />
+    <select id="status" name="status">
+      <option value="To Do" selected>To Do</option>
+      <option value="In Progress">In Progress</option>
+      <option value="Completed">Completed</option>
+    </select>
+  </div>
+
+  <br />
+
+  <button type="submit">Save Task</button>
+</form>
+
+<p><a href="/tasks/manage">Back to My Tasks</a></p>

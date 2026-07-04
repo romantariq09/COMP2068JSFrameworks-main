@@ -1,0 +1,41 @@
+<h1>{{title}}</h1>
+
+<p>Welcome, {{currentUser.username}}. Add and manage your personal tasks here.</p>
+
+<p>
+  <a href="/tasks/add">Add New Task</a>
+</p>
+
+{{#if tasks}}
+  <table>
+    <thead>
+      <tr>
+        <th>Task</th>
+        <th>Category</th>
+        <th>Due Date</th>
+        <th>Priority</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {{#each tasks}}
+        <tr>
+          <td>{{this.title}}</td>
+          <td>{{this.category}}</td>
+          <td>{{this.dueDate}}</td>
+          <td>{{this.priority}}</td>
+          <td>{{this.status}}</td>
+          <td>
+            <a href="/tasks/edit/{{this._id}}">Edit</a>
+            |
+            <a href="/tasks/delete/{{this._id}}">Delete</a>
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+{{else}}
+  <p>You have not created any tasks yet.</p>
+{{/if}}

@@ -1,0 +1,37 @@
+<h1>{{title}}</h1>
+
+<p>Log in to manage your TaskFlow tasks.</p>
+
+{{#if loginError}}
+  <p>Incorrect username or password. Please try again.</p>
+{{/if}}
+
+<form action="/users/login" method="POST">
+  <div>
+    <label for="username">Username</label><br />
+    <input
+      type="text"
+      id="username"
+      name="username"
+      required
+    />
+  </div>
+
+  <br />
+
+  <div>
+    <label for="password">Password</label><br />
+    <input
+      type="password"
+      id="password"
+      name="password"
+      required
+    />
+  </div>
+
+  <br />
+
+  <button type="submit">Log In</button>
+</form>
+
+<p>Do not have an account? <a href="/users/register">Create one</a>.</p>
