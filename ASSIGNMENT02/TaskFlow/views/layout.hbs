@@ -1,10 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>{{title}}</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{title}} | TaskFlow</title>
+
+    <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
+
   <body>
-    {{{body}}}
+    <header>
+      <nav>
+        <a href="/">TaskFlow</a>
+        <a href="/tasks">Public Tasks</a>
+
+        {{#if currentUser}}
+          <a href="/tasks/manage">My Tasks</a>
+          <span>Hi, {{currentUser.username}}</span>
+          <a href="/users/logout">Logout</a>
+        {{else}}
+          <a href="/users/login">Login</a>
+          <a href="/users/register">Create Account</a>
+        {{/if}}
+      </nav>
+    </header>
+
+    <main>
+      {{{body}}}
+    </main>
+
+    <footer>
+      <p>&copy; 2026 TaskFlow — To-Do and Study Planner</p>
+    </footer>
   </body>
 </html>
