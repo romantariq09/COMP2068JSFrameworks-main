@@ -1,2 +1,67 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+<section class="hero">
+  <div class="hero-content">
+    <p class="eyebrow">PLAN • PRIORITIZE • COMPLETE</p>
+
+    <h1>Keep every task moving forward.</h1>
+
+    <p class="hero-text">
+      TaskFlow is a simple planner for organizing school, work, and personal
+      tasks by due date, priority, and progress.
+    </p>
+
+    <div class="hero-actions">
+      {{#if currentUser}}
+        <a class="primary-link" href="/tasks/manage">Go to My Tasks</a>
+        <a class="secondary-link" href="/tasks">View Public Tasks</a>
+      {{else}}
+        <a class="primary-link" href="/users/register">Create Free Account</a>
+        <a class="secondary-link" href="/tasks">Explore Public Tasks</a>
+      {{/if}}
+    </div>
+  </div>
+
+  <div class="hero-panel">
+    <p class="panel-label">TODAY'S FOCUS</p>
+
+    <div class="preview-task">
+      <span class="priority-dot high"></span>
+      <div>
+        <strong>Finish COMP 2068 Assignment</strong>
+        <small>High priority · In Progress</small>
+      </div>
+    </div>
+
+    <div class="preview-task">
+      <span class="priority-dot medium"></span>
+      <div>
+        <strong>Review weekly study goals</strong>
+        <small>Medium priority · To Do</small>
+      </div>
+    </div>
+
+    <div class="preview-task">
+      <span class="priority-dot low"></span>
+      <div>
+        <strong>Organize personal schedule</strong>
+        <small>Low priority · Completed</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="feature-section">
+  <article class="feature-card">
+    <h2>Organize Clearly</h2>
+    <p>Create tasks for school, work, and personal responsibilities in one place.</p>
+  </article>
+
+  <article class="feature-card">
+    <h2>Stay Focused</h2>
+    <p>Use priority levels and due dates to identify what should be completed first.</p>
+  </article>
+
+  <article class="feature-card">
+    <h2>Track Progress</h2>
+    <p>Update each task from To Do to In Progress and Completed as your work moves forward.</p>
+  </article>
+</section>

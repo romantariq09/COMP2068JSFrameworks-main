@@ -4,13 +4,57 @@ let Task = require('../models/Task');
 let isAuthenticated = require('../middleware/auth');
 
 // Public read-only page: displays all tasks from MongoDB.
+// Public read-only page with keyword search and task filters.
+// Public read-only page with keyword search and task filters.
 router.get('/', async (req, res, next) => {
   try {
-    let tasks = await Task.find().sort({ dueDate: 1 });
+    let search = req.query.search || '';
+    let category = req.query.category || '';
+    let priority = req.query.priority || '';
+    let status = req.query.status || '';
+
+    let filters = {};
+
+    if (search) {
+      filters.title = {
+        $regex: search,
+        $options: 'i'
+      };
+    }
+
+    if (category) {
+      filters.category = category;
+    }
+
+    if (priority) {
+      filters.priority = priority;
+    }
+
+    if (status) {
+      filters.status = status;
+    }
+
+    let tasks = await Task.find(filters).sort({ dueDate: 1 });
 
     res.render('tasks/index', {
       title: 'Public Task List',
-      tasks: tasks
+      tasks: tasks,
+      search: search,
+
+      isAllCategories: !category,
+      isSchool: category === 'School',
+      isWork: category === 'Work',
+      isPersonal: category === 'Personal',
+
+      isAllPriorities: !priority,
+      isLow: priority === 'Low',
+      isMedium: priority === 'Medium',
+      isHigh: priority === 'High',
+
+      isAllStatuses: !status,
+      isToDo: status === 'To Do',
+      isInProgress: status === 'In Progress',
+      isCompleted: status === 'Completed'
     });
   } catch (error) {
     next(error);
