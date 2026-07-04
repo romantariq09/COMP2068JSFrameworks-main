@@ -1,0 +1,37 @@
+<h1>{{title}}</h1>
+
+<p>This page shows all TaskFlow tasks. Sign in to manage tasks.</p>
+
+{{#if tasks}}
+  <table>
+    <thead>
+      <tr>
+        <th>Task</th>
+        <th>Category</th>
+        <th>Due Date</th>
+        <th>Priority</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {{#each tasks}}
+        <tr>
+          <td>
+            <strong>{{this.title}}</strong>
+            {{#if this.description}}
+              <br />
+              <small>{{this.description}}</small>
+            {{/if}}
+          </td>
+          <td>{{this.category}}</td>
+          <td>{{this.dueDate}}</td>
+          <td>{{this.priority}}</td>
+          <td>{{this.status}}</td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+{{else}}
+  <p>No tasks have been added yet.</p>
+{{/if}}
