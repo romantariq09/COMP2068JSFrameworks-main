@@ -45,7 +45,8 @@ router.post('/register', async (req, res) => {
 router.get('/login', (req, res) => {
   res.render('auth/login', {
     title: 'Login',
-    loginError: req.query.error
+    loginError: req.query.error,
+    githubError: req.query.githubError
   });
 });
 
@@ -57,6 +58,24 @@ router.post(
   }),
   (req, res) => {
     res.redirect('/tasks');
+  }
+);
+// Start GitHub login.
+router.get(
+  '/github',
+  passport.authenticate('github', {
+    scope: ['user:email']
+  })
+);
+
+// Handle GitHub callback after authorization.
+router.get(
+  '/github/callback',
+  passport.authenticate('github', {
+    failureRedirect: '/users/login?githubError=1'
+  }),
+  (req, res) => {
+    res.redirect('/tasks/manage');
   }
 );
 

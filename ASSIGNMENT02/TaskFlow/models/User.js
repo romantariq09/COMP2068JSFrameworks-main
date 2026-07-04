@@ -4,9 +4,13 @@ let passportLocalMongoose = require('passport-local-mongoose').default;
 let userSchema = new mongoose.Schema({
   email: {
     type: String,
-    required: true,
     trim: true,
     lowercase: true
+  },
+  githubId: {
+    type: String,
+    unique: true,
+    sparse: true
   }
 });
 

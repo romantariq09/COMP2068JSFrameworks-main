@@ -351,3 +351,18 @@ footer p {
     grid-template-columns: 1fr;
   }
 }
+
+.github-login {
+  display: inline-block;
+  padding: 10px 16px;
+  border-radius: 6px;
+  background: #24292f;
+  color: white;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.github-login:hover {
+  background: #000000;
+  text-decoration: none;
+}

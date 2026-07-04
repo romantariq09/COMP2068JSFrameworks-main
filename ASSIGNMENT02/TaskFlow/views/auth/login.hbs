@@ -34,4 +34,15 @@
   <button type="submit">Log In</button>
 </form>
 
+<p>Or</p>
+
+<p>
+  <a class="github-login" href="/users/github">Continue with GitHub</a>
+</p>
+
+{{#if githubError}}
+  <p>GitHub login was not completed. Please try again.</p>
+{{/if}}
+
 <p>Do not have an account? <a href="/users/register">Create one</a>.</p>
+

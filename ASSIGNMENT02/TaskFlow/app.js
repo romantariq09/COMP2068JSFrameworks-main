@@ -9,6 +9,7 @@ let mongoose = require('mongoose');
 
 let session = require('express-session');
 let passport = require('passport');
+let GitHubStrategy = require('passport-github2').Strategy;
 let User = require('./models/User');
 
 let indexRouter = require('./routes/index');
@@ -30,6 +31,50 @@ passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+passport.use(
+  new GitHubStrategy(
+    {
+      clientID: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+      callbackURL: process.env.GITHUB_CALLBACK_URL
+    },
+    async (accessToken, refreshToken, profile, done) => {
+      try {
+        let user = await User.findOne({ githubId: profile.id });
+
+        if (user) {
+          return done(null, user);
+        }
+
+        let username = profile.username || `github_${profile.id}`;
+
+        let existingUsername = await User.findOne({ username: username });
+
+        if (existingUsername) {
+          username = `${username}_${profile.id}`;
+        }
+
+        let email = '';
+
+        if (profile.emails && profile.emails.length > 0) {
+          email = profile.emails[0].value;
+        }
+
+        user = new User({
+          username: username,
+          email: email,
+          githubId: profile.id
+        });
+
+        await user.save();
+
+        return done(null, user);
+      } catch (error) {
+        return done(error);
+      }
+    }
+  )
+);
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
