@@ -68,4 +68,21 @@ router.get("/logout", (req, res, next) => {
   });
 });
 
+// Login with GitHub
+router.get(
+  "/auth/github",
+  passport.authenticate("github")
+);
+
+// GitHub callback
+router.get(
+  "/auth/github/callback",
+  passport.authenticate("github", {
+    failureRedirect: "/login",
+  }),
+  (req, res) => {
+    res.redirect("/books");
+  }
+);
+
 module.exports = router;

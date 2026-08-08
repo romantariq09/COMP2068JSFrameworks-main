@@ -7,6 +7,7 @@ const session = require("express-session");
 const passport = require("passport");
 const User = require("./models/user");
 const userRoutes = require("./routes/users");
+const GitHubStrategy = require("passport-github2").Strategy;
 const app = express();
 
 const PORT = process.env.PORT || 3000;
@@ -32,6 +33,40 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+passport.use(User.createStrategy());
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+passport.use(
+  new GitHubStrategy(
+    {
+      clientID: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+      callbackURL: "http://localhost:3000/auth/github/callback",
+    },
+
+    async (accessToken, refreshToken, profile, done) => {
+      try {
+        let user = await User.findOne({
+          githubId: profile.id,
+        });
+
+        if (!user) {
+          user = await User.create({
+            username: `github_${profile.username || profile.id}`,
+            githubId: profile.id,
+          });
+        }
+
+        return done(null, user);
+      } catch (error) {
+        return done(error);
+      }
+    }
+  )
+);
 
 app.use((req, res, next) => {
   res.locals.currentUser = req.user;
