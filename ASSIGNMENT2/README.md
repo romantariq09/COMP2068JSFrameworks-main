@@ -72,4 +72,4 @@ Live Site: https://booknest-5jt9.onrender.com
 
 ## GitHub Repository
 
-BookNest is located inside the ASSIGNMENT2 folder of the class repository.
+https://github.com/romantariq09/COMP2068JSFrameworks-main/tree/main/ASSIGNMENT2
