@@ -68,7 +68,7 @@ Only authenticated users can:
 
 The deployed BookNest application will be available here:
 
-Live Site: Coming Soon
+Live Site: https://booknest-5jt9.onrender.com
 
 ## GitHub Repository
 
