@@ -24,6 +24,48 @@
 <hr>
     <h1>Book Collection</h1>
 
+    <form method="GET" action="/books">
+
+    <input
+        type="text"
+        name="search"
+        placeholder="Search by title or author"
+        value="{{search}}"
+    >
+
+    <button type="submit">
+        Search
+    </button>
+
+    {{#if search}}
+        <a href="/books">Clear Search</a>
+    {{/if}}
+
+</form>
+
+<br>
+
+    <form method="GET" action="/books">
+
+    <input
+        type="text"
+        name="search"
+        placeholder="Search by title or author"
+        value="{{search}}"
+    >
+
+    <button type="submit">
+        Search
+    </button>
+
+    {{#if search}}
+        <a href="/books">Clear Search</a>
+    {{/if}}
+
+</form>
+
+<br>
+
     {{#if currentUser}}
     <a href="/books/add">Add New Book</a>
 {{/if}}
@@ -33,6 +75,8 @@
     {{#if books.length}}
 
         {{#each books}}
+
+
 
             <div>
                 <h2>{{this.title}}</h2>

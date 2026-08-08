@@ -15,11 +15,35 @@ function isAuthenticated(req, res, next) {
 // Display all books
 router.get("/", async (req, res) => {
   try {
-    const books = await Book.find();
+    const search = req.query.search || "";
+
+    let query = {};
+
+    if (search) {
+      query = {
+        $or: [
+          {
+            title: {
+              $regex: search,
+              $options: "i",
+            },
+          },
+          {
+            author: {
+              $regex: search,
+              $options: "i",
+            },
+          },
+        ],
+      };
+    }
+
+    const books = await Book.find(query);
 
     res.render("books/index", {
       title: "Books",
       books: books,
+      search: search,
     });
   } catch (error) {
     console.log(error);
