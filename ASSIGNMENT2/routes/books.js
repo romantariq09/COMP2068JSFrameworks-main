@@ -46,4 +46,52 @@ router.post("/add", async (req, res) => {
   }
 });
 
+// Show Edit Book form
+router.get("/:id/edit", async (req, res) => {
+  try {
+    const book = await Book.findById(req.params.id);
+
+    res.render("books/edit", {
+      title: "Edit Book",
+      book: book,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Error loading book");
+  }
+});
+
+// Update Book
+router.put("/:id", async (req, res) => {
+  try {
+    await Book.findByIdAndUpdate(req.params.id, {
+      title: req.body.title,
+      author: req.body.author,
+      genre: req.body.genre,
+      publicationYear: req.body.publicationYear,
+      isbn: req.body.isbn,
+      description: req.body.description,
+      availability: req.body.availability,
+      image: req.body.image,
+    });
+
+    res.redirect("/books");
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Error updating book");
+  }
+});
+
+// Delete Book
+router.delete("/:id", async (req, res) => {
+  try {
+    await Book.findByIdAndDelete(req.params.id);
+
+    res.redirect("/books");
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Error deleting book");
+  }
+});
+
 module.exports = router;

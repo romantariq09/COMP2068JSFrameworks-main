@@ -36,6 +36,16 @@
                     <strong>Availability:</strong>
                     {{this.availability}}
                 </p>
+
+                <a href="/books/{{this._id}}/edit">Edit Book</a>
+
+                <form
+                        method="POST"
+                        action="/books/{{this._id}}?_method=DELETE"
+                        onsubmit="return confirm('Are you sure you want to delete this book?');"
+                    >
+                        <button type="submit">Delete Book</button>
+                    </form>
             </div>
 
         {{/each}}

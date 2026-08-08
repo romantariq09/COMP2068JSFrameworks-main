@@ -2,6 +2,7 @@ const express = require("express");
 const hbs = require("hbs");
 const path = require("path");
 const bookRoutes = require("./routes/books");
+const methodOverride = require("method-override");
 const app = express();
 
 const PORT = process.env.PORT || 3000;
@@ -14,20 +15,10 @@ app.set("view engine", "hbs");
 
 // Public folder
 app.use(express.static(path.join(__dirname, "public")));
-
 app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride("_method"));
 // Partials
 hbs.registerPartials(path.join(__dirname, "views/partials"));
-// Home route
-app.get("/", (req, res) => {
-  res.render("index", {
-    title: "BookNest"
-  });
-});
-
-// Partials
-hbs.registerPartials(path.join(__dirname, "views/partials"));
-
 app.use("/books", bookRoutes);
 
 // Home route
