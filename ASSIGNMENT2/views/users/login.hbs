@@ -1,64 +1,78 @@
-<!DOCTYPE html>
-<html lang="en">
+{{> header}}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<div class="row justify-content-center">
 
-    <title>Login | BookNest</title>
-</head>
+    <div class="col-md-6 col-lg-5">
 
-<body>
+        <div class="card shadow-sm">
 
-    <h1>Login</h1>
+            <div class="card-body p-4">
 
-    <form method="POST" action="/login">
+                <h1 class="text-center mb-4">
+                    Login
+                </h1>
 
-        <div>
-            <label for="username">Username</label>
+                <form method="POST" action="/login">
 
-            <input
-                type="text"
-                id="username"
-                name="username"
-                required
-            >
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Username
+                        </label>
+
+                        <input
+                            type="text"
+                            name="username"
+                            class="form-control"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="mb-4">
+
+                        <label class="form-label">
+                            Password
+                        </label>
+
+                        <input
+                            type="password"
+                            name="password"
+                            class="form-control"
+                            required
+                        >
+
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="btn btn-dark w-100"
+                    >
+                        Login
+                    </button>
+
+                </form>
+
+                <hr class="my-4">
+
+                <a
+                    href="/auth/github"
+                    class="btn btn-outline-dark w-100"
+                >
+                    Login with GitHub
+                </a>
+
+                <p class="text-center mt-4 mb-0">
+                    Don't have an account?
+                    <a href="/register">Register</a>
+                </p>
+
+            </div>
+
         </div>
 
-        <br>
+    </div>
 
-        <div>
-            <label for="password">Password</label>
+</div>
 
-            <input
-                type="password"
-                id="password"
-                name="password"
-                required
-            >
-        </div>
-
-        <br>
-
-        <button type="submit">
-            Login
-        </button>
-
-    </form>
-
-    <hr>
-
-<p>Or login using:</p>
-
-<a href="/auth/github">
-    Login with GitHub
-</a>
-
-    <p>
-        Don't have an account?
-        <a href="/register">Register</a>
-    </p>
-
-</body>
-
-</html>
+{{> footer}}

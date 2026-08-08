@@ -1,121 +1,119 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{title}} | BookNest</title>
-</head>
+{{> header}}
 
-<body>
+<div class="row justify-content-center">
 
-    <h1>Add New Book</h1>
+    <div class="col-lg-8">
 
-    <form method="POST" action="/books/add">
+        <div class="card shadow-sm">
 
-        <div>
-            <label for="title">Book Title</label>
-            <input
-                type="text"
-                id="title"
-                name="title"
-                required
-            >
+            <div class="card-body p-4">
+
+                <h1 class="mb-4">Add New Book</h1>
+
+                <form method="POST" action="/books/add">
+
+                    <div class="mb-3">
+                        <label class="form-label">Book Title</label>
+                        <input
+                            type="text"
+                            name="title"
+                            class="form-control"
+                            required
+                        >
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Author</label>
+                        <input
+                            type="text"
+                            name="author"
+                            class="form-control"
+                            required
+                        >
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Genre</label>
+                        <input
+                            type="text"
+                            name="genre"
+                            class="form-control"
+                            required
+                        >
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Publication Year</label>
+                        <input
+                            type="number"
+                            name="publicationYear"
+                            class="form-control"
+                        >
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">ISBN</label>
+                        <input
+                            type="text"
+                            name="isbn"
+                            class="form-control"
+                        >
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Description</label>
+
+                        <textarea
+                            name="description"
+                            class="form-control"
+                            rows="4"
+                        ></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Availability</label>
+
+                        <select
+                            name="availability"
+                            class="form-select"
+                        >
+                            <option value="Available">
+                                Available
+                            </option>
+
+                            <option value="Unavailable">
+                                Unavailable
+                            </option>
+
+                        </select>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label">Image URL</label>
+
+                        <input
+                            type="text"
+                            name="image"
+                            class="form-control"
+                        >
+                    </div>
+
+                    <button class="btn btn-dark" type="submit">
+                        Add Book
+                    </button>
+
+                    <a href="/books" class="btn btn-outline-secondary">
+                        Cancel
+                    </a>
+
+                </form>
+
+            </div>
+
         </div>
 
-        <br>
+    </div>
 
-        <div>
-            <label for="author">Author</label>
-            <input
-                type="text"
-                id="author"
-                name="author"
-                required
-            >
-        </div>
+</div>
 
-        <br>
-
-        <div>
-            <label for="genre">Genre</label>
-            <input
-                type="text"
-                id="genre"
-                name="genre"
-                required
-            >
-        </div>
-
-        <br>
-
-        <div>
-            <label for="publicationYear">Publication Year</label>
-            <input
-                type="number"
-                id="publicationYear"
-                name="publicationYear"
-            >
-        </div>
-
-        <br>
-
-        <div>
-            <label for="isbn">ISBN</label>
-            <input
-                type="text"
-                id="isbn"
-                name="isbn"
-            >
-        </div>
-
-        <br>
-
-        <div>
-            <label for="description">Description</label>
-
-            <textarea
-                id="description"
-                name="description"
-                rows="5"
-            ></textarea>
-        </div>
-
-        <br>
-
-        <div>
-            <label for="availability">Availability</label>
-
-            <select
-                id="availability"
-                name="availability"
-            >
-                <option value="Available">Available</option>
-                <option value="Unavailable">Unavailable</option>
-            </select>
-        </div>
-
-        <br>
-
-        <div>
-            <label for="image">Image URL</label>
-            <input
-                type="text"
-                id="image"
-                name="image"
-            >
-        </div>
-
-        <br>
-
-        <button type="submit">
-            Add Book
-        </button>
-
-    </form>
-
-    <br>
-
-    <a href="/books">Back to Books</a>
-
-</body>
-</html>
+{{> footer}}

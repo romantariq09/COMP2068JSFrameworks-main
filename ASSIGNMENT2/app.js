@@ -66,7 +66,7 @@ passport.use(
       }
     }
   )
-);
+);hbs.registerPartials(path.join(__dirname, "views/partials"));
 
 app.use((req, res, next) => {
   res.locals.currentUser = req.user;

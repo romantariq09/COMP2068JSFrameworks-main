@@ -1,16 +1,69 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{title}}</title>
-</head>
+{{> header}}
 
-<body>
+<section class="text-center py-5">
 
-    <h1>Welcome to BookNest 📚</h1>
+    <div class="py-5">
 
-    <p>Your online library management application.</p>
+        <h1 class="display-3 fw-bold mb-3">
+            Welcome to BookNest
+        </h1>
 
-</body>
-</html>
+        <p class="lead text-muted mb-4">
+            Discover, organize, and manage your library collection in one place.
+        </p>
+
+        <a href="/books" class="btn btn-dark btn-lg me-2">
+            Browse Books
+        </a>
+
+        {{#unless currentUser}}
+            <a href="/register" class="btn btn-outline-dark btn-lg">
+                Create Account
+            </a>
+        {{/unless}}
+
+    </div>
+
+</section>
+
+<section class="row text-center mb-5">
+
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm p-4">
+
+            <h3>📚 Browse</h3>
+
+            <p class="text-muted">
+                Explore books available in the BookNest library collection.
+            </p>
+
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm p-4">
+
+            <h3>🔎 Search</h3>
+
+            <p class="text-muted">
+                Quickly search for books by title or author.
+            </p>
+
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm p-4">
+
+            <h3>⚙️ Manage</h3>
+
+            <p class="text-muted">
+                Registered users can add, edit, and manage library books.
+            </p>
+
+        </div>
+    </div>
+
+</section>
+
+{{> footer}}
