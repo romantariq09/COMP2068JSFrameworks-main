@@ -8,10 +8,25 @@
 </head>
 
 <body>
+    {{#if currentUser}}
 
+    <p>Welcome, {{currentUser.username}}</p>
+    <a href="/logout">Logout</a>
+
+{{else}}
+
+    <a href="/login">Login</a>
+    |
+    <a href="/register">Register</a>
+
+{{/if}}
+
+<hr>
     <h1>Book Collection</h1>
 
+    {{#if currentUser}}
     <a href="/books/add">Add New Book</a>
+{{/if}}
 
 <br><br>
 
@@ -37,15 +52,19 @@
                     {{this.availability}}
                 </p>
 
-                <a href="/books/{{this._id}}/edit">Edit Book</a>
+                {{#if currentUser}}
+    <a href="/books/add">Add New Book</a>
 
-                <form
+                    <form
                         method="POST"
                         action="/books/{{this._id}}?_method=DELETE"
                         onsubmit="return confirm('Are you sure you want to delete this book?');"
                     >
                         <button type="submit">Delete Book</button>
                     </form>
+{{/if}}
+
+                
             </div>
 
         {{/each}}

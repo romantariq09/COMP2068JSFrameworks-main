@@ -3,6 +3,10 @@ const hbs = require("hbs");
 const path = require("path");
 const bookRoutes = require("./routes/books");
 const methodOverride = require("method-override");
+const session = require("express-session");
+const passport = require("passport");
+const User = require("./models/user");
+const userRoutes = require("./routes/users");
 const app = express();
 
 const PORT = process.env.PORT || 3000;
@@ -17,6 +21,30 @@ app.set("view engine", "hbs");
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
+
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET || "booknestsecret",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use((req, res, next) => {
+  res.locals.currentUser = req.user;
+  next();
+});
+
+passport.use(User.createStrategy());
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+app.use("/", userRoutes);
+app.use("/books", bookRoutes);
 // Partials
 hbs.registerPartials(path.join(__dirname, "views/partials"));
 app.use("/books", bookRoutes);

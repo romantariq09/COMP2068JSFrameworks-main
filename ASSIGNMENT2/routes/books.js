@@ -3,6 +3,15 @@ const router = express.Router();
 
 const Book = require("../models/book");
 
+// Check if user is logged in
+function isAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+
+  res.redirect("/login");
+}
+
 // Display all books
 router.get("/", async (req, res) => {
   try {
@@ -19,14 +28,14 @@ router.get("/", async (req, res) => {
 });
 
 // Show Add Book form
-router.get("/add", (req, res) => {
+router.get("/add",isAuthenticated, (req, res) => {
   res.render("books/add", {
     title: "Add Book",
   });
 });
 
 // Add new book
-router.post("/add", async (req, res) => {
+router.post("/add", isAuthenticated, async (req, res) => {
   try {
     await Book.create({
       title: req.body.title,
@@ -47,7 +56,7 @@ router.post("/add", async (req, res) => {
 });
 
 // Show Edit Book form
-router.get("/:id/edit", async (req, res) => {
+router.get("/:id/edit", isAuthenticated,async (req, res) => {
   try {
     const book = await Book.findById(req.params.id);
 
@@ -62,7 +71,7 @@ router.get("/:id/edit", async (req, res) => {
 });
 
 // Update Book
-router.put("/:id", async (req, res) => {
+router.put("/:id",isAuthenticated, async (req, res) => {
   try {
     await Book.findByIdAndUpdate(req.params.id, {
       title: req.body.title,
@@ -83,7 +92,7 @@ router.put("/:id", async (req, res) => {
 });
 
 // Delete Book
-router.delete("/:id", async (req, res) => {
+router.delete("/:id",isAuthenticated, async (req, res) => {
   try {
     await Book.findByIdAndDelete(req.params.id);
 
